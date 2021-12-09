@@ -1,0 +1,28 @@
+:host {
+  width: 55%;
+}
+
+.mat-row .mat-cell {
+  border-top: 1px solid transparent;
+}
+
+.mat-row:hover .mat-cell {
+  border-color: black;
+}
+
+table {
+  width: 100%;
+}
+
+.coin-image {
+  width: 25px;
+  height: 25px;
+}
+
+.icon-info {
+  color: aqua;
+}
+
+.favorite-icon {
+  color: orange;
+}
