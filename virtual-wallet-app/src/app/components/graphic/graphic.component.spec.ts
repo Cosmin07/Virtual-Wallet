@@ -8,8 +8,9 @@ describe('GraphicComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [GraphicComponent],
-    }).compileComponents();
+      declarations: [ GraphicComponent ]
+    })
+    .compileComponents();
   });
 
   beforeEach(() => {
