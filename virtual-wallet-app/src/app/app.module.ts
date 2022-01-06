@@ -7,17 +7,32 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { FavoritesComponent } from './components/favorites/favorites.component';
 import { FavoriteComponent } from './components/favorite/favorite.component';
-import { MatCardModule } from '@angular/material/card';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { MatCardModule } from '@angular/material/card';
+import { HttpClientModule } from '@angular/common/http';
 import { CoinDetailsComponent } from './components/coin-details/coin-details.component';
 import { WalletComponent } from './components/wallet/wallet.component';
 import { GraphicComponent } from './components/graphic/graphic.component';
-import { MatPaginatorModule } from '@angular/material/paginator';
+
 import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatInputModule } from '@angular/material/input';
 
+import { NgxEchartsModule } from 'ngx-echarts';
+import { CurrentCurrencyComponent } from './components/current-currency/current-currency.component';
+import { MatButtonModule } from '@angular/material/button';
+import { FormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
+import { RouterModule, Routes } from '@angular/router';
+import { TransactionComponent } from './components/transaction/transaction.component';
+
+const routes: Routes = [
+  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: 'dashboard', component: DashboardComponent },
+  { path: 'history', component: TransactionComponent },
+];
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,16 +44,26 @@ import { MatMenuModule } from '@angular/material/menu';
     CoinDetailsComponent,
     WalletComponent,
     GraphicComponent,
+    CurrentCurrencyComponent,
+    TransactionComponent
   ],
   imports: [
     BrowserModule,
-    MatCardModule,
     BrowserAnimationsModule,
-    HttpClientModule,
-    MatPaginatorModule,
+    RouterModule.forRoot(routes),
+    MatCardModule,
+    MatButtonModule,
+    FormsModule,
     MatTableModule,
+    MatPaginatorModule,
     MatIconModule,
+    MatInputModule,
     MatMenuModule,
+    MatSelectModule,
+    HttpClientModule,
+    NgxEchartsModule.forRoot({
+      echarts: () => import('echarts'),
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent],

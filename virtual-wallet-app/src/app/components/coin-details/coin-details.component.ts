@@ -1,52 +1,51 @@
-import { AfterViewInit, Component, ViewChild, OnInit } from '@angular/core';
+import { ShareDataService } from './../../services/share-data.service';
+import { CoinInfo } from './../../models/CoinInfo';
+import { CoinsService } from './../../services/coins.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { CoinsService } from './../../services/coins.service';
-import { CoinInfo } from './../../models/CoinInfo';
-import { ShareDataService } from './../../services/share-data.service';
 
 @Component({
   selector: 'app-coin-details',
   templateUrl: './coin-details.component.html',
-  styleUrls: ['./coin-details.component.scss'],
+  styleUrls: ['./coin-details.component.css']
 })
-export class CoinDetailsComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = [
-    'info',
-    'image',
-    'name',
-    'current_price',
-    'symbol',
-    'last_updated',
-    'favorites',
-  ];
+export class CoinDetailsComponent implements OnInit {
+
+  displayedColumns: string[] = ['info', 'image', 'name', 'current_price', 'symbol', 'last_updated', 'favorites'];
   dataSource = new MatTableDataSource<CoinInfo>();
-
-  public favoritesSet = new Set<string>();
-
-  constructor(
-    private coinServece: CoinsService,
-    private sharedData: ShareDataService
-  ) {}
+  public selectedCoin: CoinInfo;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
+  public setFavorite(element: CoinInfo): void {
+    if(this.favoritesSet.has(element.id)) {
+      this.favoritesSet.delete(element.id);
+      console.log('deleted');
+    } else {
+      this.favoritesSet.add(element.id);
+      console.log('added');
+    }
+
+    this.sharedData.coin$.next([...this.favoritesSet]);
+  }
+
+  public favoritesSet = new Set<string>();
+
+  public setSelectedCoin(coin: CoinInfo) {
+    this.selectedCoin = coin;
+    this.sharedData.selectedCoin$.next(coin.id);
+  }
+
+  constructor(private coinService: CoinsService, private sharedData: ShareDataService) { }
+
   ngOnInit(): void {
-    this.coinServece.getCoins().subscribe((data: CoinInfo[]) => {
+    this.coinService.getCoins().subscribe((data: CoinInfo[]) => {
       this.dataSource.data = data;
     });
   }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
-  }
-
-  public setFavorite(element: CoinInfo): void {
-    if (this.favoritesSet.has(element.id)) {
-      this.favoritesSet.delete(element.id);
-    } else {
-      this.favoritesSet.add(element.id);
-      this.sharedData.coin$.next(element.id);
-    }
   }
 }

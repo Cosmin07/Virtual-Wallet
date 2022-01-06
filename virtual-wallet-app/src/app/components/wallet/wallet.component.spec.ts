@@ -8,8 +8,9 @@ describe('WalletComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [WalletComponent],
-    }).compileComponents();
+      declarations: [ WalletComponent ]
+    })
+    .compileComponents();
   });
 
   beforeEach(() => {
