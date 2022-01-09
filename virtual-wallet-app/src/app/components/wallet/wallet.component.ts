@@ -7,7 +7,7 @@ import { ShareDataService } from 'src/app/services/share-data.service';
 @Component({
   selector: 'app-wallet',
   templateUrl: './wallet.component.html',
-  styleUrls: ['./wallet.component.css'],
+  styleUrls: ['./wallet.component.scss'],
 })
 export class WalletComponent implements OnInit {
   public coinId: string[];

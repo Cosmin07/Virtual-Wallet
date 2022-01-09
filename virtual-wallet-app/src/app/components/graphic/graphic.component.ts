@@ -7,7 +7,7 @@ import { switchMap } from 'rxjs/operators';
 @Component({
   selector: 'app-graphic',
   templateUrl: './graphic.component.html',
-  styleUrls: ['./graphic.component.css'],
+  styleUrls: ['./graphic.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GraphicComponent implements OnInit {

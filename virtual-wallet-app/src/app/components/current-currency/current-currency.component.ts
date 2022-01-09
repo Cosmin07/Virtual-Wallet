@@ -4,7 +4,7 @@ import { ShareDataService } from 'src/app/services/share-data.service';
 @Component({
   selector: 'app-current-currency',
   templateUrl: './current-currency.component.html',
-  styleUrls: ['./current-currency.component.css'],
+  styleUrls: ['./current-currency.component.scss'],
 })
 export class CurrentCurrencyComponent implements OnInit {
   constructor(private shareDataService: ShareDataService) {}
